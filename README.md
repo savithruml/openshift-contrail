@@ -2,14 +2,14 @@
 
 # INSTALL DEPENDENCIES
 
-master-1.sh
+./master-1.sh
 
     yum install ansible kernel-devel kernel-headers git epel-release -y
     yum install "@Development Tools" python2-pip openssl-devel python-devel -y
     sed -i s/SELINUX=permissive/SELINUX=enforcing/g /etc/selinux/config
     reboot
 
-slave-1.sh
+./slave-1.sh
 
     yum install kernel-devel kernel-headers nfs-utils socat epel-release -y
     sed -i s/SELINUX=permissive/SELINUX=enforcing/g /etc/selinux/config
@@ -17,7 +17,7 @@ slave-1.sh
 
 # INSTALL OPENSHIFT
 
-master-2.sh
+./master-2.sh
 
     ssh-keygen –t rsa
     ssh-copy-id root@master
@@ -35,6 +35,8 @@ master-2.sh
     ansible-playbook -i inventory/byo/ose-install playbooks/byo/config.yml
 
 # INSTALL CONTRAIL
+
+./master-3.sh
 
     cd ~/root
     mkdir contrail-ansible && cd contrail-ansible
