@@ -15,8 +15,6 @@ slave-1.sh
     sed -i s/SELINUX=permissive/SELINUX=enforcing/g /etc/selinux/config
     reboot
 
-#########################################################################################
-
 # INSTALL OPENSHIFT
 
 master-2.sh
@@ -36,9 +34,6 @@ master-2.sh
     ansible-playbook -i inventory/byo/ose-install playbooks/byo/openshift_facts.yml
     ansible-playbook -i inventory/byo/ose-install playbooks/byo/config.yml
 
-
-#########################################################################################
-
 # INSTALL CONTRAIL
 
     cd ~/root
@@ -49,7 +44,3 @@ master-2.sh
     yes | cp ~/openshift-contrail/contrail/install-files/hosts playbooks/inventory/my-inventory/
 
     ansible-playbook -i inventory/my-inventory site.yml
-
-
-
-
