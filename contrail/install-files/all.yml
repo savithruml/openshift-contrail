@@ -1,0 +1,12 @@
+docker_registry: 10.84.5.71:5000
+docker_registry_insecure: True
+docker_install_method: package
+docker_py_pkg_install_method: pip
+ansible_user: root
+ansible_become: true
+os_release: ubuntu16.04
+contrail_compute_mode: container
+contrail_version: 4.0.0.0-20
+cloud_orchestrator: openshift
+vrouter_physical_interface: eno1
+os_sdn_network_plugin_name='cni'

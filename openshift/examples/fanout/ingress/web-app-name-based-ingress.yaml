@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: name-based-ing
+spec:
+  rules:
+  - host: dev.com
+    http:
+      paths:
+      - backend:
+          serviceName: web-app-dev
+          servicePort: 80
+  - host: qa.com
+    http:
+      paths:
+      - backend:
+          serviceName: web-app-qa
+          servicePort: 80

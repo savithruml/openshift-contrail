@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fanout-ing
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /dev
+        backend:
+          serviceName: web-app-dev
+          servicePort: 80
+      - path: /qa
+        backend:
+          serviceName: web-app-qa
+          servicePort: 80
