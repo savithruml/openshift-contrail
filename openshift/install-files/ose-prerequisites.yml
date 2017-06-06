@@ -16,6 +16,8 @@
     yum: name="{{ item }}" state=present enablerepo=epel
     with_items:
       - pyOpenSSL
+      - python-cryptography
+      - python-lxml
 
   - name: Install Docker
     yum: name=docker state=present
