@@ -4,8 +4,8 @@
 
 ./master-1.sh
 
-    yum install ansible kernel-devel kernel-headers git epel-release -y
-    yum install "@Development Tools" python2-pip openssl-devel python-devel -y
+    yum install kernel-devel kernel-headers git epel-release -y
+    yum install "ansible @Development Tools" python2-pip openssl-devel python-devel -y
     sed -i s/SELINUX=permissive/SELINUX=enforcing/g /etc/selinux/config
     reboot
 
