@@ -9,4 +9,3 @@ contrail_compute_mode: container
 contrail_version: 4.0.0.0-20
 cloud_orchestrator: openshift
 vrouter_physical_interface: eno1
-os_sdn_network_plugin_name='cni'
