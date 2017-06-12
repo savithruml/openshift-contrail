@@ -7,73 +7,71 @@
         IMAGE:      Centos 7.3
         FLAVOR:     t2.micro
         DISK:       20 GB
+        SEC GRP:    Allow all traffic from everywhere
     
     * Master Node   (x1)
     
         IMAGE:      Centos 7.3
         FLAVOR:     t2.xlarge
         DISK:       250 GB
+        SEC GRP:    Allow all traffic from everywhere
     
     * Slave Node    (x1)
     
         IMAGE:      Centos 7.3
         FLAVOR:     t2.xlarge
-        DISK:       250 GB
+        DISK:       250 G
+        SEC GRP:    Allow all traffic from everywhere
 
-**NOTE:** Make sure to launch the instances in the same subnet & auto assign public IP 
-<br >
+**NOTE:** Make sure to launch the instances in the same subnet & remember to select the *auto-assign public IP* option
+
+## ENABLE ROOT-SSH ACCESS
+
+    Run these commands on all nodes. This will enable root access with password
+    
+    (all-nodes)# sudo su
+    (all-nodes)# passwd
+    (all-nodes)# sed -e 's/#PermitRootLogin yes/PermitRootLogin yes/g' -e 's/PasswordAuthentication no/PasswordAuthentication                  yes/g' /etc/ssh/sshd_config 
+    (all-nodes)# service sshd restart
+    (all-nodes)# yum install git epel-release -y
+    (all-nodes)# logout
+    
+    Logout & login as root user
 
 ## INSTALL DEPENDENCIES
+    
+    (ansible-node)# yum install ansible pyOpenSSL python-cryptography python-lxml -y
 
+    (master-node)# yum install kernel-devel kernel-headers -y && reboot
 
-
-./master-1.sh
-
-    yum install wget -y
-    wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    rpm -ivh epel-release-latest-7.noarch.rpm
-    yum install kernel-devel kernel-headers git ansible -y
-    yum install "@Development Tools" python2-pip openssl-devel python-devel -y
-    sed -i s/SELINUX=permissive/SELINUX=enforcing/g /etc/selinux/config
-    reboot
-
-./slave-1.sh
-
-    yum install wget -y
-    wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    rpm -ivh epel-release-latest-7.noarch.rpm
-    yum install kernel-devel kernel-headers nfs-utils socat -y
-    sed -i s/SELINUX=permissive/SELINUX=enforcing/g /etc/selinux/config
-    reboot
+    (slave-node)# yum install kernel-devel kernel-headers nfs-utils socat -y && reboot
 
 # INSTALL OPENSHIFT
 
-./master-2.sh
+    (ansible-node)# ssh-keygen –t rsa
+    (ansible-node)# ssh-copy-id root@localhost
+    (ansible-node)# ssh-copy-id root@<master-node>
+    (ansible-node)# ssh-copy-id root@<slave-node>
 
-    ssh-keygen –t rsa
-    ssh-copy-id root@master
-    ssh-copy-id root@slave
+    (ansible-node)# cd /root
+    (ansible-node)# git clone https://github.com/savithruml/openshift-contrail
+    (ansible-node)# git clone https://github.com/openshift/openshift-ansible
 
-    cd /root
-    git clone https://github.com/savithruml/openshift-contrail
-    git clone https://github.com/openshift/openshift-ansible
+    (ansible-node)# yes | cp /root/openshift-contrail/openshift/install-files/ose-install openshift-ansible/inventory/byo
+    (ansible-node)# yes | cp /root/openshift-contrail/openshift/install-files/ose-prerequisites.yml openshift-ansible/inventory/byo
 
-    yes | cp /root/openshift-contrail/openshift/install-files/ose-install openshift-ansible/inventory/byo/
-    yes | cp /root/openshift-contrail/openshift/install-files/ose-prerequisites.yml openshift-ansible/inventory/byo/
-
-    cd /root/openshift-ansible
-    ansible-playbook -i inventory/byo/ose-install playbooks/byo/openshift_facts.yml
-    ansible-playbook -i inventory/byo/ose-install playbooks/byo/config.yml
+    (ansible-node)# cd /root/openshift-ansible
+    (ansible-node)# ansible-playbook -i inventory/byo/ose-install playbooks/byo/openshift_facts.yml
+    (ansible-node)# ansible-playbook -i inventory/byo/ose-install playbooks/byo/config.yml
 
 # INSTALL CONTRAIL
 
 ./master-3.sh
 
-    cd /root
-    mkdir contrail-ansible && cd contrail-ansible
-    wget http://10.84.5.120/github-build/R4.0/20/ubuntu-14-04/mitaka/artifacts_extra/contrail-ansible-4.0.0.0-20.tar.gz
-    tar -xvzf contrail-ansible-4.0.0.0-20.tar.gz
-    yes | cp /root/openshift-contrail/contrail/install-files/all.yml playbooks/inventory/my-inventory/group_vars/
-    yes | cp /root/openshift-contrail/contrail/install-files/hosts playbooks/inventory/my-inventory/
-
-    ansible-playbook -i inventory/my-inventory site.yml
+    (ansible-node)# cd /root
+    (ansible-node)# mkdir contrail-ansible && cd contrail-ansible
+    (ansible-node)# scp <contrail-docker>
+    (ansible-node)# tar -xvzf contrail-ansible-4.0.0.0-20.tar.gz
+    (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/all.yml playbooks/inventory/my-inventory/group_vars
+    (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/hosts playbooks/inventory/my-inventory
+    (ansible-node)# ansible-playbook -i inventory/my-inventory site.yml
