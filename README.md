@@ -25,7 +25,7 @@
 
 **NOTE:** Make sure to launch the instances in the same subnet & remember to select the *auto-assign public IP* option
 
-## ENABLE ROOT-SSH ACCESS
+### ENABLE ROOT-SSH ACCESS
 
     Run these commands on all nodes. This will enable root access with password
     
@@ -38,7 +38,7 @@
     
     Logout & login as root user
 
-## INSTALL DEPENDENCIES
+### INSTALL DEPENDENCIES
     
     (ansible-node)# yum install ansible pyOpenSSL python-cryptography python-lxml -y
 
@@ -46,7 +46,7 @@
 
     (slave-node)# yum install kernel-devel kernel-headers nfs-utils socat -y && reboot
 
-# INSTALL OPENSHIFT
+### INSTALL OPENSHIFT
 
     (ansible-node)# ssh-keygen –t rsa
     (ansible-node)# ssh-copy-id root@localhost
@@ -59,19 +59,21 @@
 
     (ansible-node)# yes | cp /root/openshift-contrail/openshift/install-files/ose-install openshift-ansible/inventory/byo
     (ansible-node)# yes | cp /root/openshift-contrail/openshift/install-files/ose-prerequisites.yml openshift-ansible/inventory/byo
+    
+         Modify /root/openshift-contrail/openshift/install-files/ose-install with all hosts (master & slave) information
 
     (ansible-node)# cd /root/openshift-ansible
     (ansible-node)# ansible-playbook -i inventory/byo/ose-install playbooks/byo/openshift_facts.yml
     (ansible-node)# ansible-playbook -i inventory/byo/ose-install playbooks/byo/config.yml
 
-# INSTALL CONTRAIL
-
-./master-3.sh
+### INSTALL CONTRAIL
 
     (ansible-node)# cd /root
     (ansible-node)# mkdir contrail-ansible && cd contrail-ansible
     (ansible-node)# scp <contrail-docker>
     (ansible-node)# tar -xvzf contrail-ansible-4.0.0.0-20.tar.gz
+    
     (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/all.yml playbooks/inventory/my-inventory/group_vars
     (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/hosts playbooks/inventory/my-inventory
+    
     (ansible-node)# ansible-playbook -i inventory/my-inventory site.yml
