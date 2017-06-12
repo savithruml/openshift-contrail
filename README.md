@@ -46,7 +46,7 @@
 
     (slave-node)# yum install kernel-devel kernel-headers nfs-utils socat -y && reboot
 
-### INSTALL OPENSHIFT
+## INSTALL OPENSHIFT
 
     (ansible-node)# ssh-keygen –t rsa
     (ansible-node)# ssh-copy-id root@localhost
