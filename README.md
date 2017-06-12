@@ -1,6 +1,32 @@
 # RedHat Openshift Origin with Juiper Contrail Networking
 
-# INSTALL DEPENDENCIES
+## LAUNCH INSTANCES ON AWS
+
+    * Ansible Node  (x1)
+    
+        IMAGE:      Centos 7.3
+        FLAVOR:     t2.micro
+        DISK:       20 GB
+    
+    * Master Node   (x1)
+    
+        IMAGE:      Centos 7.3
+        FLAVOR:     t2.xlarge
+        DISK:       250 GB
+    
+    * Slave Node    (x1)
+    
+        IMAGE:      Centos 7.3
+        FLAVOR:     t2.xlarge
+        DISK:       250 GB
+
+*NOTE:* Make sure to launch the instances in the same subnet & auto assign public IP 
+
+
+
+## INSTALL DEPENDENCIES
+
+
 
 ./master-1.sh
 
