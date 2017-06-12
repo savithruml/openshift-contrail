@@ -70,8 +70,8 @@
 
     Download Contrail-Ansible package & Contrail-Docker images, 
     
-    PACKAGE: contrail-ansible-4.0.0.0-20.tar.gz (Ubuntu 14.04)
-    IMAGES:  contrail-kubernetes-docker-images_4.0.0.0-20.tgz (Ubuntu 14.04)
+         PACKAGE: contrail-ansible-4.0.0.0-20.tar.gz                 (Ubuntu 14.04)
+         IMAGES:  contrail-kubernetes-docker-images_4.0.0.0-20.tgz   (Ubuntu 14.04)
 
     (ansible-node)# cd /root
     (ansible-node)# mkdir contrail-ansible && cd contrail-ansible
@@ -84,6 +84,62 @@
     (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/hosts inventory/my-inventory
     
          Populate /root/contrail-ansible/playbooks/inventory/my-inventory/hosts with all hosts (Config/Control/Analytics/Compute) information
-         Populate /root/contrail-ansible/playbooks/inventory/my-inventory/group_vars/all.yml with all Contrail related information
+         Populate /root/contrail-ansible/playbooks/inventory/my-inventory/group_vars/all.yml with Contrail related information
  
     (ansible-node)# ansible-playbook -i inventory/my-inventory site.yml
+    
+ ## INIT CONTRAIL/OPENSHIFT
+ 
+    Create a new project & move into the project context
+    
+         (master-node)# oc login -u system:admin
+         (master-node)# oc new-project juniper 
+         (master-node)# oc project juniper
+
+    Create a service account to access the APIs
+         
+         (master-node)# oc create serviceaccount useroot
+    
+    Bind the service account to the role
+
+         (master-node)# oadm policy add-cluster-role-to-user cluster-reader system:serviceaccount:juniper:useroot
+
+    Add the user to a “privileged” security context constraint
+
+         (master-node)# oadm policy add-scc-to-user privileged system:serviceaccount:juniper:useroot
+         
+    Assign cluster-admin role to admin user
+    
+         (master-node)# oadm policy add-cluster-role-to-user cluster-admin admin
+
+    Get a token assigned to a service account
+         
+         (master-node)# oc serviceaccounts get-token useroot
+         
+    Copy this token. Login to "Contrail-kube-manager" container & paste this token
+    
+         (master-node)# docker exec -it contrail-kube-manager bash
+         
+               Add the token. Also, make sure cluster project dict object is empty
+               
+               (contrail-kube-manager)# vi /etc/contrail/contrail-kubernetes.conf
+               
+                     [VNC]
+                     ...
+                     cluster_project = {}
+                     ...
+                     token = <paste your token here>
+               
+               Restart contrail-kube-manager service
+               
+               (contrail-kube-manager)# supervisorctl -s unix:///var/run/supervisord_kubernetes.sock supervisor restart all
+               (contrail-kube-manager)# supervisorctl -s unix:///var/run/supervisord_kubernetes.sock supervisor status
+               (contrail-kube-manager)# exit
+  
+    Create a password for admin user to login to the UI
+    
+         (master-node)# htpasswd /etc/origin/master/htpasswd admin
+         (master-node)# oc login -u admin
+         
+ 
+   
