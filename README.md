@@ -20,9 +20,8 @@
         FLAVOR:     t2.xlarge
         DISK:       250 GB
 
-*NOTE:* Make sure to launch the instances in the same subnet & auto assign public IP 
-
-
+**NOTE:** Make sure to launch the instances in the same subnet & auto assign public IP 
+<br >
 
 ## INSTALL DEPENDENCIES
 
