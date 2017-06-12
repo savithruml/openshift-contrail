@@ -60,7 +60,7 @@
     (ansible-node)# yes | cp /root/openshift-contrail/openshift/install-files/ose-install openshift-ansible/inventory/byo
     (ansible-node)# yes | cp /root/openshift-contrail/openshift/install-files/ose-prerequisites.yml openshift-ansible/inventory/byo
     
-         Modify /root/openshift-contrail/openshift/install-files/ose-install with all hosts (master & slave) information
+         Modify /root/openshift-ansible/inventory/byo/ose-install with all hosts (master & slave) information
 
     (ansible-node)# cd /root/openshift-ansible
     (ansible-node)# ansible-playbook -i inventory/byo/ose-install playbooks/byo/openshift_facts.yml
@@ -68,12 +68,22 @@
 
 ## INSTALL CONTRAIL
 
+    Download Contrail-Ansible package & Contrail-Docker images, 
+    
+    **PACKAGE:** contrail-ansible-4.0.0.0-20.tar.gz
+    **IMAGES:** contrail-kubernetes-docker-images_4.0.0.0-20.tgz
+
     (ansible-node)# cd /root
     (ansible-node)# mkdir contrail-ansible && cd contrail-ansible
-    (ansible-node)# scp <contrail-docker>
-    (ansible-node)# tar -xvzf contrail-ansible-4.0.0.0-20.tar.gz
+    (ansible-node)# cp /root/contrail-ansible-4.0.0.0-20.tar.gz . && tar -xvzf contrail-ansible-4.0.0.0-20.tar.gz
+    (ansible-node)# mkdir playbooks/container_images && cd playbooks/container_images
+    (ansible-node)# cp /root/contrail-kubernetes-docker-images_4.0.0.0-20.tgz . && tar -xvzf contrail-kubernetes-docker-images_4.0.0.0-20.tgz
     
-    (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/all.yml playbooks/inventory/my-inventory/group_vars
-    (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/hosts playbooks/inventory/my-inventory
+    (ansible-node)# cd /root/contrail-ansible/playbooks
+    (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/all.yml inventory/my-inventory/group_vars
+    (ansible-node)# yes | cp /root/openshift-contrail/contrail/install-files/hosts inventory/my-inventory
     
+         Modify /root/contrail-ansible/playbooks/inventory/my-inventory/hosts with all hosts (Config/Control/Analytics/Compute) information
+         Modify /root/contrail-ansible/playbooks/inventory/my-inventory/group_vars/all.yml with all Contrail related information
+ 
     (ansible-node)# ansible-playbook -i inventory/my-inventory site.yml
