@@ -90,33 +90,33 @@
     
  ## INIT CONTRAIL/OPENSHIFT
  
-    Create a new project & move into the project context
+    * Create a new project & move into the project context
     
          (master-node)# oc login -u system:admin
          (master-node)# oc new-project juniper 
          (master-node)# oc project juniper
 
-    Create a service account to access the APIs
+    * Create a service account to access the APIs
          
          (master-node)# oc create serviceaccount useroot
     
-    Bind the service account to the role
+    * Bind the service account to the role
 
          (master-node)# oadm policy add-cluster-role-to-user cluster-reader system:serviceaccount:juniper:useroot
 
-    Add the user to a “privileged” security context constraint
+    * Add the user to a “privileged” security context constraint
 
          (master-node)# oadm policy add-scc-to-user privileged system:serviceaccount:juniper:useroot
          
-    Assign cluster-admin role to admin user
+    * Assign cluster-admin role to admin user
     
          (master-node)# oadm policy add-cluster-role-to-user cluster-admin admin
 
-    Get a token assigned to a service account
+    * Get a token assigned to a service account
          
          (master-node)# oc serviceaccounts get-token useroot
          
-    Copy this token. Login to "Contrail-kube-manager" container & paste this token
+    * Copy this token. Login to "Contrail-kube-manager" container & paste this token
     
          (master-node)# docker exec -it contrail-kube-manager bash
          
@@ -136,10 +136,15 @@
                (contrail-kube-manager)# supervisorctl -s unix:///var/run/supervisord_kubernetes.sock supervisor status
                (contrail-kube-manager)# exit
   
-    Create a password for admin user to login to the UI
+    * Create a password for admin user to login to the UI
     
          (master-node)# htpasswd /etc/origin/master/htpasswd admin
          (master-node)# oc login -u admin
+         
+    * Login to the Web-UI
+    
+         Contrail Web-UI:     https://<master-node-public-IP>:8143
+         OpenShift Web-UI:    https://<master-node-public-IP>:8443
          
  
    
