@@ -25,7 +25,7 @@
 
 **NOTE:** Make sure to launch the instances in the same subnet & remember to select the *auto-assign public IP* option
 
-### ENABLE ROOT-SSH ACCESS
+## ENABLE ROOT-SSH ACCESS
 
     Run these commands on all nodes. This will enable root access with password
     
@@ -38,7 +38,7 @@
     
     Logout & login as root user
 
-### INSTALL DEPENDENCIES
+## INSTALL DEPENDENCIES
     
     (ansible-node)# yum install ansible pyOpenSSL python-cryptography python-lxml -y
 
@@ -66,7 +66,7 @@
     (ansible-node)# ansible-playbook -i inventory/byo/ose-install playbooks/byo/openshift_facts.yml
     (ansible-node)# ansible-playbook -i inventory/byo/ose-install playbooks/byo/config.yml
 
-### INSTALL CONTRAIL
+## INSTALL CONTRAIL
 
     (ansible-node)# cd /root
     (ansible-node)# mkdir contrail-ansible && cd contrail-ansible
