@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: web-app-qa
+spec:
+  replicas: 3
+  selector:
+    app: web-app-qa
+  template:
+    metadata:
+      name: web-app-qa
+      labels:
+        app: web-app-qa
+    spec:
+      containers:
+      - name: web-app-qa
+        image: savvythru/web-app-qa
+        ports:
+        - containerPort: 80
