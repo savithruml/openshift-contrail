@@ -4,7 +4,7 @@ docker_install_method: package
 docker_py_pkg_install_method: pip
 ansible_user: root
 ansible_become: true
-os_release: ubuntu16.04
+os_release: ubuntu14.04
 contrail_compute_mode: container
 contrail_version: 4.0.0.0-20
 cloud_orchestrator: openshift
