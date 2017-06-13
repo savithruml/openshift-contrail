@@ -1,4 +1,4 @@
-# RedHat Openshift Origin with Juiper Contrail Networking
+# RedHat Openshift Origin with Juniper Contrail Networking
 
 ## LAUNCH INSTANCES ON AWS
 
