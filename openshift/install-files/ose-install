@@ -19,10 +19,10 @@ openshift_use_dnsmasq=False
 os_sdn_network_plugin_name='cni'
 
 [masters]
-10.87.64.149 openshift_hostname=5b4s40
+{master-node-internal-ip} openshift_hostname={master-node-internal-hostname}
 
 [etcd]
-10.87.64.149 openshift_hostname=5b4s40
+{master-node-internal-ip} openshift_hostname={master-node-internal-hostname}
 
 [nodes]
-10.87.64.150 openshift_hostname=5b4s41
+{slave-node-internal-ip} openshift_hostname={slave-node-internal-hostname}
