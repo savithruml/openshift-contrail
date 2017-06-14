@@ -1,4 +1,4 @@
-# RedHat OpenShift Container Platform - LAB 1 (Developer Workflow)
+# LAB 1 - Developer Workflow
 
 ## INTRODUCTION
 
