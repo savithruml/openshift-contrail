@@ -1,5 +1,11 @@
 # RedHat Openshift Origin with Juniper Contrail Networking
 
+## RESOURCES
+
+   * [OpenShift Blog](http://www.opencontrail.org/red-hat-openshift-container-platform-with-opencontrail-networking/)
+   
+   * [OpenShift-Contrail Demo](https://www.youtube.com/watch?v=_vdwY1ux_gg)
+
 ## LAUNCH INSTANCES ON AWS
 
     * Ansible Node  (x1)
