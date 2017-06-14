@@ -1,14 +1,14 @@
 [contrail-controllers]
-10.87.64.149
+{master-node-internal-ip}
 
 [contrail-analyticsdb]
-10.87.64.149
+{master-node-internal-ip}
 
 [contrail-analytics]
-10.87.64.149
+{master-node-internal-ip}
 
 [contrail-kubernetes]
-10.87.64.149
+{master-node-internal-ip}
 
 [contrail-compute]
-10.87.64.150
+{slave-node-internal-ip}
