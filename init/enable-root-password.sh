@@ -6,7 +6,7 @@
 
 sudo su
 passwd
-sed -e 's/#PermitRootLogin yes/PermitRootLogin yes/g' -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config 
+sed -i -e 's/#PermitRootLogin yes/PermitRootLogin yes/g' -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config 
 service sshd restart
 yum install git wget -y
 cd /root/
