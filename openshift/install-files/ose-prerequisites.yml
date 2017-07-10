@@ -11,6 +11,7 @@
       - bridge-utils
       - bash-completion
       - python-pip
+      - git
 
   - name: Install ansible and additional packages
     yum: name="{{ item }}" state=present enablerepo=epel
