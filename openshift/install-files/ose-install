@@ -17,6 +17,7 @@ osm_cluster_network_cidr=10.32.0.0/12
 openshift_portal_net=10.96.0.0/12
 openshift_use_dnsmasq=true
 os_sdn_network_plugin_name='cni'
+openshift_disable_check=docker_storage
 
 [masters]
 {master-node-internal-ip} openshift_hostname={master-node-internal-hostname}
