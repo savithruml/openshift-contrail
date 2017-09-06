@@ -14,10 +14,10 @@ openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 
 osm_cluster_network_cidr=10.32.0.0/12
 openshift_portal_net=10.96.0.0/12
 openshift_use_dnsmasq=true
-os_sdn_network_plugin_name='cni'
-openshift_use_openshift_sdn=false
 openshift_disable_check=docker_storage
 
+os_sdn_network_plugin_name='cni'
+openshift_use_openshift_sdn=false
 openshift_use_contrail=true
 os_release=ubuntu14.04
 contrail_version=4.0.1.0-28
