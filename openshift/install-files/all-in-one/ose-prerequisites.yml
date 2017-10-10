@@ -11,6 +11,7 @@
       - bridge-utils
       - bash-completion
       - git
+      - python-pip
 
   - name: Install Docker
     yum: name=docker state=present
