@@ -33,4 +33,5 @@ contrail_docker_images_path=/root
 10.87.64.149 openshift_hostname=5b4s40
 
 [nodes]
+10.87.64.149 openshift_hostname=5b4s40
 10.87.64.150 openshift_hostname=5b4s41
