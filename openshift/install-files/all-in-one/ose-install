@@ -21,8 +21,8 @@ openshift_use_openshift_sdn=false
 openshift_use_contrail=true
 contrail_os_release=redhat7
 contrail_version=4.0.2.0-34
-analyticsdb_disk_size=15
-configdb_disk_size=10
+analyticsdb_min_diskgb=15
+configdb_min_diskgb=10
 vrouter_physical_interface=eno1
 contrail_docker_images_path=/root/docker_images
 
