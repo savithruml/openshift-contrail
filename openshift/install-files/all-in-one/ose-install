@@ -19,12 +19,12 @@ openshift_disable_check=docker_storage
 os_sdn_network_plugin_name='cni'
 openshift_use_openshift_sdn=false
 openshift_use_contrail=true
-os_release=ubuntu14.04
-contrail_version=4.0.1.0-28
-analyticsdb_disk_size=25
+contrail_os_release=redhat7
+contrail_version=4.0.2.0-34
+analyticsdb_disk_size=15
 configdb_disk_size=10
 vrouter_physical_interface=eno1
-contrail_docker_images_path=/root
+contrail_docker_images_path=/root/docker_images
 
 [masters]
 10.87.64.149 openshift_hostname=5b4s40
