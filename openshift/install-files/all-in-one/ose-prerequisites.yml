@@ -12,8 +12,6 @@
       - bash-completion
       - git
       - python-pip
-      - atomic-openshift-utils
-      - atomic-openshift-docker-excluder
       - kexec-tools
       - sos
       - psacct
