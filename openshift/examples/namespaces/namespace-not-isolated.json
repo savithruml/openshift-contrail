@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
- name: "qa"
+ name: "blue"
  annotations: {
-      "opencontrail.org/isolation": "true"
+      "opencontrail.org/isolation": "false"
  }
