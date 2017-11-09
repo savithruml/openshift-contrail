@@ -25,6 +25,7 @@ analyticsdb_min_diskgb=15
 configdb_min_diskgb=10
 vrouter_physical_interface=eno1
 contrail_docker_images_path=/root/docker_images
+cni_version=v0.5.2
 
 [masters]
 10.87.64.149 openshift_hostname=5b4s40
