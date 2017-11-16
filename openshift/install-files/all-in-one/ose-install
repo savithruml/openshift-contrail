@@ -15,9 +15,11 @@ osm_cluster_network_cidr=10.32.0.0/12
 openshift_portal_net=10.96.0.0/12
 openshift_use_dnsmasq=true
 openshift_disable_check=docker_storage
+openshift_use_openshift_sdn=false
+
+# Below are Contrail variables. Comment them out if you don't want to install Contrail through ansible-playbook
 
 os_sdn_network_plugin_name='cni'
-openshift_use_openshift_sdn=false
 openshift_use_contrail=true
 contrail_os_release=redhat7
 contrail_version=4.0.2.0-34
