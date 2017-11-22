@@ -15,8 +15,8 @@
       - kexec-tools
       - sos
       - psacct
-      - atomic-openshift-utils
       - atomic-openshift-docker-excluder
+      - ntp
 
   - name: Install Docker
     yum: name=docker state=present
