@@ -14,7 +14,7 @@ openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 
 osm_cluster_network_cidr=10.32.0.0/12
 openshift_portal_net=10.96.0.0/12
 openshift_use_dnsmasq=true
-openshift_disable_check=docker_storage
+openshift_clock_enabled=true
 openshift_use_openshift_sdn=false
 
 # Below are Contrail variables. Comment them out if you don't want to install Contrail through ansible-playbook
