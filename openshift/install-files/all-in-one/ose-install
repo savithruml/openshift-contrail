@@ -15,6 +15,8 @@ osm_cluster_network_cidr=10.32.0.0/12
 openshift_portal_net=10.96.0.0/12
 openshift_use_dnsmasq=true
 openshift_clock_enabled=true
+openshift_hosted_manage_registry=false
+openshift_hosted_manage_router=false
 openshift_use_openshift_sdn=false
 
 # Below are Contrail variables. Comment them out if you don't want to install Contrail through ansible-playbook
