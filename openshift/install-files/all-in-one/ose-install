@@ -17,19 +17,20 @@ openshift_use_dnsmasq=true
 openshift_clock_enabled=true
 openshift_hosted_manage_registry=false
 openshift_hosted_manage_router=false
+openshift_enable_service_catalog=false
 openshift_use_openshift_sdn=false
+os_sdn_network_plugin_name='cni'
 
 # Below are Contrail variables. Comment them out if you don't want to install Contrail through ansible-playbook
 
-os_sdn_network_plugin_name='cni'
 openshift_use_contrail=true
 contrail_os_release=redhat7
-contrail_version=4.0.2.0-34
-analyticsdb_min_diskgb=15
-configdb_min_diskgb=10
+contrail_version=4.1.0.0-8
+analyticsdb_min_diskgb=50
+configdb_min_diskgb=25
 vrouter_physical_interface=eno1
-contrail_docker_images_path=/root/docker_images
-cni_version=v0.5.2
+contrail_docker_images_path=/tmp
+#cni_version=v0.5.2
 
 [masters]
 10.87.64.149 openshift_hostname=5b4s40
