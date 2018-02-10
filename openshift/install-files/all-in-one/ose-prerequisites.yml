@@ -10,13 +10,12 @@
       - iptables-services
       - bridge-utils
       - bash-completion
-      - git
       - python-pip
       - kexec-tools
       - sos
       - psacct
       - atomic-openshift-docker-excluder
-      - ntp
+      - python-netaddr
 
   - name: Install Docker
     yum: name=docker state=present
