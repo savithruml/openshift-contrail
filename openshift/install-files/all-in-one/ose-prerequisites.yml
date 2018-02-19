@@ -17,7 +17,7 @@
       - atomic-openshift-docker-excluder
 
   - name: Install docker-py
-    yum: pip install docker-py
+    command: pip install docker-py
 
   - name: Install Docker
     yum: name=docker state=present
