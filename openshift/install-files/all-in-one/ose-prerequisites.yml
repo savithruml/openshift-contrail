@@ -15,7 +15,9 @@
       - sos
       - psacct
       - atomic-openshift-docker-excluder
-      - python-netaddr
+
+  - name: Install docker-py
+    yum: pip install docker-py
 
   - name: Install Docker
     yum: name=docker state=present
