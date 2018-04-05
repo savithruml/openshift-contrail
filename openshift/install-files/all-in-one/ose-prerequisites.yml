@@ -1,21 +1,29 @@
 ---
 - hosts: OSEv3
   tasks:
-  - name: Install the following base packages
+  - name: Install base packages
     yum: name="{{ item }}" state=present
     with_items:
-      - wget
-      - net-tools
-      - bind-utils
-      - iptables-services
-      - bridge-utils
-      - bash-completion
-      - python-pip
-      - kexec-tools
-      - sos
-      - psacct
-      - atomic-openshift-docker-excluder
+    - wget
+    - net-tools
+    - bind-utils
+    - iptables-services
+    - bridge-utils
+    - bash-completion
+    - git
+    - python-pip
+    - kexec-tools
+    - sos
+    - psacct
+    - ntp
 
+  - name: Install Openshift Enterprise package
+    yum: name="{{ item }}" state=present
+    with_items:
+    - atomic-openshift-docker-excluder
+    when:
+    - deployment_type == "openshift-enterprise"
+    
   - name: Install docker-py
     command: pip install docker-py
 
