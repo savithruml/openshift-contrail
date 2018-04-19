@@ -25,14 +25,22 @@ os_sdn_network_plugin_name='cni'
 
 # Below are Contrail variables. Comment them out if you don't want to install Contrail through ansible-playbook
 
+# Contrail 4.X releases
+#openshift_use_contrail=true
+#contrail_os_release=redhat7
+#contrail_version=4.0
+#analyticsdb_min_diskgb=50
+#configdb_min_diskgb=25
+#vrouter_physical_interface=eno1
+#contrail_docker_images_path=/root/docker_images
+
+# Contrail 5.X releases
 openshift_use_contrail=true
-contrail_os_release=redhat7
-contrail_version=4.1.0.0-8
+contrail_version=5.0
 analyticsdb_min_diskgb=50
 configdb_min_diskgb=25
+contrail_container_tag=newton-master-39
 vrouter_physical_interface=eno1
-contrail_docker_images_path=/tmp
-#cni_version=v0.5.2
 
 [masters]
 10.87.64.149 openshift_hostname=5b4s40
@@ -42,4 +50,4 @@ contrail_docker_images_path=/tmp
 
 [nodes]
 10.87.64.149 openshift_hostname=5b4s40
-10.87.64.150 openshift_hostname=5b4s41
+10.87.64.150 openshift_hostname=5b4s41 openshift_node_labels="{'region': 'infra'}"
