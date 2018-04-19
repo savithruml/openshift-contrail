@@ -25,6 +25,8 @@
     
   - name: Install docker-py
     command: pip install docker-py
+    when:
+    - deployment_type == "openshift-enterprise"
 
   - name: Install docker
     yum:
