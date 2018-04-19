@@ -44,18 +44,3 @@
       name: NetworkManager
       state: started
       enabled: yes
-
-  - name: Stop ntp service
-    service:
-      name: ntpd
-      state: stopped
-      enabled: yes
-
-  - name: Sync ntp service
-    command: ntpdate -s time.nist.gov
-
-  - name: Start the ntp service
-    service:
-      name: ntpd
-      state: started
-      enabled: yes
