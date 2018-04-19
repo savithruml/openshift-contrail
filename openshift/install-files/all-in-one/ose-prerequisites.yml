@@ -4,20 +4,19 @@
   - name: Install base packages
     yum: name="{{ item }}" state=present
     with_items:
-    - wget
     - net-tools
     - bind-utils
     - iptables-services
     - bridge-utils
     - bash-completion
-    - git
     - python-pip
     - kexec-tools
     - sos
     - psacct
     - ntp
+    - NetworkManager
 
-  - name: Install Openshift Enterprise package
+  - name: Install openshift-enterprise package
     yum: name="{{ item }}" state=present
     with_items:
     - atomic-openshift-docker-excluder
@@ -27,11 +26,34 @@
   - name: Install docker-py
     command: pip install docker-py
 
-  - name: Install Docker
-    yum: name=docker-1.12.6 state=present
+  - name: Install docker
+    yum:
+      name: docker-1.12.6
+      state: present
 
-  - name: Enable Docker Service
-    service: name=docker enabled=yes
+  - name: Enable & start docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+      
+  - name: Enble & start network-manager service
+    service:
+      name: NetworkManager
+      state: started
+      enabled: yes
 
-  - name: Start Docker Service
-    service: name=docker state=started
+  - name: Stop ntp service
+    service:
+      name: ntpd
+      state: stopped
+      enabled: yes
+
+  - name: Sync ntp service
+    command: ntpdate -s time.nist.gov
+
+  - name: Start the ntp service
+    service:
+      name: ntpd
+      state: started
+      enabled: yes
